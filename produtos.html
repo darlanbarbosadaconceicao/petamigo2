@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<title>Pet-Amigo - Carrinho de Compras</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background-color: #f7f7f7;
+    padding-bottom: 220px; /* Espaço extra para que o carrinho não cubra os produtos */
+  }
+
+  header {
+    background-color: #006666;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+
+  nav ul li a:hover {
+    background-color: #009999;
+  }
+
+  h2 {
+    text-align: center;
+    padding: 20px;
+    color: #006666;
+  }
+
+  .produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .produto {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+
+  .produto:hover {
+    box-shadow: 0 0 10px #009999;
+  }
+
+  .produto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .produto h3 {
+    color: #006666;
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .produto .preco {
+    font-weight: bold;
+    color: #009999;
+    margin-bottom: 10px;
+  }
+
+  .produto button {
+    padding: 8px 12px;
+    background-color: #006666;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .produto button:hover {
+    background-color: #009999;
+  }
+
+  /* Carrinho deslizante */
+  .carrinho-panel {
+    background: white;
+    padding: 15px;
+    border-top: 2px solid #006666;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 200px;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    transform: translateY(100%); /* escondido por padrão */
+    transition: transform 0.3s;
+    z-index: 100;
+  }
+
+  .carrinho-panel.open {
+    transform: translateY(0); /* visível quando aberto */
+  }
+
+  .carrinho-panel h3 {
+    color: #006666;
+    margin-bottom: 10px;
+  }
+
+  .carrinho-itens p {
+    font-size: 14px;
+    padding: 2px 0;
+  }
+
+  .carrinho-panel button {
+    background: #009999;
+    padding: 8px 12px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .carrinho-panel button:hover {
+    background: #006666;
+  }
+
+  .toggle-cart-btn {
+    position: fixed;
+    bottom: 220px;
+    right: 20px;
+    background: #006666;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .toggle-cart-btn:hover {
+    background: #009999;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Pet-Amigo</h1>
+    <nav>
+      <ul id="menu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="Agvet.html">Agendar Veterinário</a></li>
+        <li><a href="agpet.html">Pet Shop</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h2>Loja Pet-Amigo</h2>
+  
+  <div class="produtos">
+    <div class="produto">
+      <img src="https://m.media-amazon.com/images/I/61AAERO8spL._AC_UF1000,1000_QL80_.jpg" alt="Brinquedo Mordedor" />
+      <h3>Brinquedo Mordedor</h3>
+      <div class="preco">R$ 45,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://www.petlove.com.br/images/products/271738/product/31027526343_Areia_Higi%C3%AAnica_Meau_Biodegrad%C3%A1vel_Gr%C3%A3os_Finos_para_Gatos_%281%29.jpg?1692103494" alt="Areia Higiênica" />
+      <h3>Areia Biodegradável Meau</h3>
+      <div class="preco">R$ 35,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://blog-static.petlove.com.br/wp-content/uploads/2020/01/Racao_Affinity_PetCare_GranPlus_Choice_Frango_e_Carne.jpg" alt="Ração" />
+      <h3>Ração Gran Plus</h3>
+      <div class="preco">R$ 60,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://a-static.mlcdn.com.br/800x560/coleira-para-cachorro-ajustavel-azul-unica-mix/unicamixcombr/cn108azp-pp/9b3f06d46bacb4c443687d089ad16cdf.jpeg" alt="Coleira" />
+      <h3>Coleira Azul</h3>
+      <div class="preco">R$ 25,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCDtCq2INSaSPLkCeyCApritgF4LE-dEnbhg&s" alt="Petiscos Naturais" />
+      <h3>Petiscos Naturais Origens</h3>
+      <div class="preco">R$ 20,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://lardaana.com/cdn/shop/files/Sb8b09fa39a484b9389205204336a7365o.webp?v=1696875550" alt="Cama Gato" />
+      <h3>Cama para Gatos</h3>
+      <div class="preco">R$ 80,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://cdn.awsli.com.br/806/806328/produto/210330152/granado-pet-shampoo-neutro-pygkyv.jpg" alt="Shampoo Pet" />
+      <h3>Shampoo neutro para pets Gramado</h3>
+      <div class="preco">R$ 28,90</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyqNHKOFaeugIz-AkrQ0dIA_JLB9SOZBUHGw&s" alt="Tapete Higiênico" />
+      <h3>Tapete Higiênico Sanol Dog</h3>
+      <div class="preco">R$ 45,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://m.media-amazon.com/images/I/61F54QgHKAL.jpg" alt="Arranhador" />
+      <h3>Arranhador</h3>
+      <div class="preco">R$ 32,00</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsSdX-Hxvf_fnAV2sOTHuT0XCw6Q5TuVx54A&s" alt="Pâtê Whiskas" />
+      <h3>Pâtê Whiskas Frango</h3>
+      <div class="preco">R$ 5,50</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+    <div class="produto">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAdQHNLjk-GPsqrzpDmeSSGz0Xt-Rp6JhLvg&s" alt="Roupa" />
+      <h3>roupa para cães </h3>
+      <div class="preco">R$ 79,00</div>
+      <button>Adicionar ao carrinho</button>
+
+    </div>
+    <div class="produto">
+      <img src="https://cdn.awsli.com.br/600x700/2689/2689597/produto/263256010/whatsapp-image-2024-05-22-at-11-10-28-9oiq72n7kb.jpeg" alt="escova" />
+      <h3>escova para cães </h3>
+      <div class="preco">R$ 11,90</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://a-static.mlcdn.com.br/800x560/bebedouro-pote-de-agua-kit-fonte-baby-para-gatos-e-cachorros-petlon/oliststore/mgli2ssahczil4jz/e273758d967e3bc36fc9a208bd696378.jpeg" alt="bebedouro" />
+      <h3>bebedouro</h3>
+      <div class="preco">R$ 25,90</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://images.tcdn.com.br/img/img_prod/699275/alicate_savana_de_unha_premium_cabo_emborrachado_para_caes_e_gatos_9701_1_792a7fae561f1c6fd4936622e2db6221.jpg" alt="cortador" />
+      <h3>cortador de unha </h3>
+      <div class="preco">R$ 35,90</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <img src="https://a-static.mlcdn.com.br/1500x1500/luva-escova-de-banho-para-pet-cachorro-gato-removedor-pelos-luva-escova-rasqueadeira-tira-pelo/oliststore/mgltq826i46q6ju7/53adb34d9a721cac845dd57aca1067d6.jpeg" alt="Luva" />
+      <h3>Luva para lavar animais</h3>
+      <div class="preco">R$ 7,90</div>
+      <button>Adicionar ao carrinho</button>
+    </div>
+  </div>
+  </div>
+  <!-- Botão para abrir/fechar o carrinho -->
+  <button class="toggle-cart-btn" onclick="toggleCarrinho()">🛒</button>
+
+  <!-- Carrinho deslizante -->
+  <div class="carrinho-panel" id="carrinho-panel">
+    <h3>🛒 Carrinho (<span id="quantidade">0</span> itens)</h3>
+    <div class="carrinho-itens" id="carrinho-itens"></div>
+    <div><strong>Total: <span id="total">R$ 0,00</span></strong></div>
+    <button id="limpar">Limpar carrinho</button>
+    <button id="checkout">Fechar pedido</button>
+  </div>
+
+<script>
+  let total = 0;
+  let quantidade = 0;
+  const carrinhoItens = document.getElementById('carrinho-itens');
+
+  function formatarParaBRL(valor) {
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+  }
+
+  function adicionarAoCarrinho(event) {
+    const produto = event.target.closest(".produto");
+    const nome = produto.querySelector('h3').innerText;
+    const precoTexto = produto.querySelector(".preco").innerText;
+    const preco = parseFloat(precoTexto.replace("R$", "").replace(",", "."));
+
+    total += preco;
+    quantidade++;
+    document.getElementById("total").innerText = formatarParaBRL(total);
+    document.getElementById("quantidade").innerText = quantidade;
+
+    const p = document.createElement('p');
+    p.innerText = `${nome} - ${formatarParaBRL(preco)}`;
+    carrinhoItens.appendChild(p);
+
+    event.target.innerText = "Adicionado!";
+    event.target.disabled = true;
+  }
+
+  function limparCarrinho() {
+    total = 0;
+    quantidade = 0;
+    carrinhoItens.innerHTML = '';
+    document.getElementById('total').innerText = formatarParaBRL(total);
+    document.getElementById('quantidade').innerText = quantidade;
+
+    document.querySelectorAll('.produto button').forEach((btn) => {
+      btn.innerText = "Adicionar ao carrinho";
+      btn.disabled = false;
+    });
+  }
+
+  function fecharPedido() {
+    if (quantidade === 0) {
+      alert('Seu carrinho está vazio.');
+      return;
+    }
+    alert(`Pedido fechado!\nTotal: ${formatarParaBRL(total)}\nObrigado por comprar na Pet-Amigo!`);
+    limparCarrinho();
+  }
+
+  function toggleCarrinho() {
+    document.getElementById('carrinho-panel').classList.toggle('open');
+  }
+
+  document.querySelectorAll(".produto button").forEach(botao => {
+    botao.addEventListener("click", adicionarAoCarrinho);
+  });
+
+  document.getElementById('limpar').addEventListener('click', limparCarrinho);
+  document.getElementById('checkout').addEventListener('click', fecharPedido);
+</script>
+</body>
+</html>

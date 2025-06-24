@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agendar Veterinário - Pet-Amigo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f2f2f2;
+    }
+
+    header {
+      width: 100%;
+      background-color: #006666;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: white;
+      font-size: 28px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #009999;
+    }
+
+    .conteudo {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .conteudo h1 {
+      text-align: center;
+      color: #006666;
+      margin-bottom: 25px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    form button {
+      background-color: #006666;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    form button:hover {
+      background-color: #009999;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      nav ul li {
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pet-Amigo</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="Agvet.html">Agendar Veterinário</a></li>
+        <li><a href="agpet.html">Atendimento Pet Shop</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="conteudo">
+    <h1>Agendar Veterinário</h1>
+    <form>
+      <label for="nome">Nome do Responsável:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="pet">Nome do Pet:</label>
+      <input type="text" id="pet" name="pet" required>
+
+      <label for="tipo">Tipo de Animal:</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">Selecione</option>
+        <option value="cachorro">Cachorro</option>
+        <option value="gato">Gato</option>
+        <option value="outro">Outro</option>
+      </select>
+
+      <label for="buscar">Precisamos buscar o animal?</label>
+      <select id="buscar" name="buscar" required onchange="verificarBusca()">
+        <option value="">Selecione</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select>
+
+      <div id="campo-endereco" style="display: none;">
+        <label for="endereco">Endereço para buscar o animal:</label>
+        <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade">
+      </div>
+
+      <label for="data">Data do Atendimento:</label>
+      <input type="date" id="data" name="data" required>
+
+      <label for="hora">Horário Preferido:</label>
+      <input type="time" id="hora" name="hora" required>
+
+      <label for="obs">Observações:</label>
+      <textarea id="obs" name="obs" placeholder="Descreva sintomas ou observações relevantes..."></textarea>
+
+      <button type="submit">Confirmar Agendamento</button>
+    </form>
+  </div>
+
+  <script>
+    function verificarBusca() {
+      const select = document.getElementById("buscar");
+      const campoEndereco = document.getElementById("campo-endereco");
+
+      if (select.value === "sim") {
+        campoEndereco.style.display = "block";
+        document.getElementById("endereco").required = true;
+      } else {
+        campoEndereco.style.display = "none";
+        document.getElementById("endereco").required = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

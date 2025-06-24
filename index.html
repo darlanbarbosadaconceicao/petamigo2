@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet-Amigo - Produtos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f2f2f2;
+    }
+
+   
+    header {
+      width: 100%;
+      background-color: #006666;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: white;
+      font-size: 28px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #009999;
+    }
+
+    .conteudo {
+      max-width: 900px;
+      margin: 20px auto 40px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .conteudo > h1 {
+      color: #006666;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .produto {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: box-shadow 0.3s;
+      background-color: #fafafa;
+    }
+
+    .produto:hover {
+      box-shadow: 0 0 10px #009999;
+    }
+
+    .produto img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .produto h3 {
+      color: #006666;
+      margin: 15px 0 10px;
+      font-size: 20px;
+    }
+
+    .produto p {
+      color: #555;
+      font-size: 14px;
+      min-height: 40px;
+      margin-bottom: 15px;
+    }
+
+    .preco {
+      font-weight: bold;
+      color: #009999;
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      nav ul li {
+        margin-bottom: 5px;
+      }
+
+      .produto img {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <header>
+    <h1>Pet-Amigo</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="Agvet.html">Agendar Veterinário</a></li>
+        <li><a href="agpet.html">Atendimento Pet Shop</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  
+  <div class="conteudo">
+    <h1>Ofertas do dia</h1>
+    <div class="produtos">
+      <div class="produto">
+        <img src="https://blog-static.petlove.com.br/wp-content/uploads/2020/01/Racao_Affinity_PetCare_GranPlus_Choice_Frango_e_Carne.jpg" alt="Ração Premium para Cães" />
+        <h3>Ração Gran Plus Choice</h3>
+        <div class="preco">R$ 60,00</div>
+      </div>
+
+      <div class="produto">
+        <img src="https://www.petlove.com.br/images/products/271738/product/31027526343_Areia_Higi%C3%AAnica_Meau_Biodegrad%C3%A1vel_Gr%C3%A3os_Finos_para_Gatos_%281%29.jpg?1692103494" alt="Areia Higiênica para Gatos" />
+        <h3>Areia Biodegradável Meau</h3>
+        <div class="preco">R$ 35,00</div>
+      </div>
+
+      <div class="produto">
+        <img src="https://m.media-amazon.com/images/I/61AAERO8spL._AC_UF1000,1000_QL80_.jpg" alt="Brinquedo Mordedor para Cães" />
+        <h3>Brinquedo Mordedor</h3>
+        <div class="preco">R$ 45,00</div>
+      </div>
+
+      <div class="produto">
+        <img src="https://lardaana.com/cdn/shop/files/Sb8b09fa39a484b9389205204336a7365o.webp?v=1696875550" alt="Caminha para Gatos" />
+        <h3>Cama para Gatos</h3>
+        <div class="preco">R$ 80,00</div>
+      </div>
+
+      <div class="produto">
+        <img src="https://a-static.mlcdn.com.br/800x560/coleira-para-cachorro-ajustavel-azul-unica-mix/unicamixcombr/cn108azp-pp/9b3f06d46bacb4c443687d089ad16cdf.jpeg" alt="Coleira Ajustável" />
+        <h3>Coleira Ajustável</h3>
+        <div class="preco">R$ 25,00</div>
+      </div>
+
+      <div class="produto">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCDtCq2INSaSPLkCeyCApritgF4LE-dEnbhg&s" alt="Petiscos Naturais" />
+        <h3>Origens Petiscos Naturais</h3>
+        <div class="preco">R$ 20,00</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
